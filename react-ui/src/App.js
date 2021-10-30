@@ -16,22 +16,22 @@ const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 function App() {
+  const [currentNavLink, setIsCurrentNavLink] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [currentLink, setIsCurrentLink] = useState("");
 
   const handleOnCollapse = (bool) => {
     setIsCollapsed(bool);
   };
 
   const handleOnNavLink = (e) => {
-    setIsCurrentLink({ current: e.key });
+    setIsCurrentNavLink({ current: e.key });
   };
 
   return (
     <div className="App">
       <Menu
         onClick={handleOnNavLink}
-        selectedKeys={[currentLink]}
+        selectedKeys={[currentNavLink]}
         mode="horizontal"
       >
         <Menu.Item key="mail" icon={<MailOutlined />}>
