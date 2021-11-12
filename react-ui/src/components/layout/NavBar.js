@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SideBar from "./SideBar";
 import { Menu } from "antd";
 import {
   FireOutlined,
@@ -26,7 +27,6 @@ const NavBar = () => {
       <Item id="brand" key="brand" icon={<FireOutlined />}>
         Brand
       </Item>
-
       <Item className="nav-item" key="signin" icon={<LoginOutlined />}>
         Sign In
       </Item>
@@ -53,6 +53,9 @@ const NavBar = () => {
           <Item key="setting:4">Option 4</Item>
         </ItemGroup>
       </SubMenu>
+      {/* <>
+        <SideBar />
+      </> */}
     </Menu>
   );
 };
