@@ -3,14 +3,31 @@
 .App {
 }
 
+.app-layout {
+  width: 100vw;
+  height: 100vh;
+  /* padding-bottom: 60px; */
+}
+
 .navbar {
   display: flex;
   justify-content: flex-end;
   top: 0;
   left: 0;
-  position: sticky;
-  width: 100vw;
-  /* border: 4px solid blue; */
+  /* position: sticky; */
+  position: static;
+  width: 100%;
+  border: 3px solid red;
+}
+
+.app-container {
+  position: relative;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  /* right: 0; */
+  width: 100%;
+  height: 100%;
 }
 
 #brand {
@@ -19,6 +36,11 @@
   /* border: 2px solid red; */
 }
 
-.nav-item {
-  /* border: 2px solid red; */
+.footer {
+  position: relative;
+  width: 100%;
+  height: 5vh;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
