@@ -4,6 +4,7 @@ import { Menu } from "antd";
 import {
   FireOutlined,
   LoginOutlined,
+  LogoutOutlined,
   UserAddOutlined,
   UserOutlined,
 } from "@ant-design/icons";
@@ -27,35 +28,52 @@ const NavBar = () => {
       <Item id="brand" key="brand" icon={<FireOutlined />}>
         Brand
       </Item>
+      <Item className="nav-item" key="sidebar">
+        <SideBar />
+      </Item>
       <Item className="nav-item" key="signin" icon={<LoginOutlined />}>
         Sign In
       </Item>
       <Item className="nav-item" key="signup" icon={<UserAddOutlined />}>
         Sign Up
       </Item>
-      <Item className="nav-item" key="???">
+      <Item className="nav-item" key="???" icon={<UserOutlined />}>
         <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-          ???
+          Dashboard
         </a>
       </Item>
       <SubMenu
         className="nav-item"
         key="SubMenu"
         icon={<UserOutlined />}
-        title="User Profile"
+        title="Options"
       >
         <ItemGroup title="Item 1">
-          <Item key="setting:1">Option 1</Item>
-          <Item key="setting:2">Option 2</Item>
+          <Item className="nav-sub-item" key="setting:1">
+            Option 1
+          </Item>
+          <Item className="nav-sub-item" key="setting:2">
+            Option 2
+          </Item>
         </ItemGroup>
         <ItemGroup title="Item 2">
-          <Item key="setting:3">Option 3</Item>
-          <Item key="setting:4">Option 4</Item>
+          <Item className="nav-sub-item" key="setting:3">
+            Option 3
+          </Item>
+          <Item className="nav-sub-item" key="setting:4">
+            Option 4
+          </Item>
+        </ItemGroup>
+        <ItemGroup title="Item 3">
+          <Item
+            className="nav-sub-item"
+            key="signout"
+            icon={<LogoutOutlined />}
+          >
+            Sign Out
+          </Item>
         </ItemGroup>
       </SubMenu>
-      {/* <>
-        <SideBar />
-      </> */}
     </Menu>
   );
 };
