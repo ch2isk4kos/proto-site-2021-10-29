@@ -1,14 +1,16 @@
 import React from "react";
 import NavBar from "./NavBar";
+import AppContainer from "./AppContainer";
+import Footer from "./Footer";
+import { Layout } from "antd";
 
 const AppLayout = () => {
   return (
-    <div className="app-layout">
+    <Layout className="app-layout" style={{ border: "3px solid blue" }}>
       <NavBar />
-      <h1 className="layout" style={{ border: "2px solid blue" }}>
-        App Layout
-      </h1>
-    </div>
+      <AppContainer />
+      <Footer />
+    </Layout>
   );
 };
 
