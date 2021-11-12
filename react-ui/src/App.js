@@ -1,11 +1,11 @@
 import React from "react";
-import Layout from "./components/layout/Layout";
+import AppLayout from "./components/layout/AppLayout";
 import "./App.css";
 
 const App = () => {
   return (
     <div className="App">
-      <Layout />
+      <AppLayout />
     </div>
   );
 };
