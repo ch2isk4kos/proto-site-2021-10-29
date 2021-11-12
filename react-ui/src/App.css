@@ -1,11 +1,24 @@
 @import "antd/dist/antd.css";
 
 .App {
-  /* text-align: center; */
 }
 
-.logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+.navbar {
+  display: flex;
+  justify-content: end;
+  top: 0;
+  left: 0;
+  position: sticky;
+  width: 100vw;
+  border: 4px solid blue;
+}
+
+#brand {
+  left: 0;
+  position: absolute;
+  border: 2px solid red;
+}
+
+.nav-item {
+  border: 2px solid red;
 }
