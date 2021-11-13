@@ -12,7 +12,7 @@ const AppContainer = () => {
     <Content className="app-container" style={{ border: "3px solid green" }}>
       <div className="site-layout-background">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/*" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
