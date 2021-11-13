@@ -4,6 +4,7 @@
 }
 
 .app-layout {
+  /* display: flex; */
   width: 100vw;
   height: 100vh;
   /* padding-bottom: 60px; */
@@ -37,10 +38,21 @@
 }
 
 .footer {
-  position: relative;
-  width: 100%;
-  height: 5vh;
+  display: flex;
+  justify-content: flex-start;
   left: 0;
   bottom: 0;
+  position: relative;
+  width: 100%;
+  /* height: 5vh; */
+  height: auto;
+  border: 3px solid red;
+  z-index: 10;
+}
+
+#name {
+  position: absolute;
+  top: 0;
   right: 0;
+  z-index: 11;
 }
