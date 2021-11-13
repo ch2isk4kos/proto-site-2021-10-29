@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import SideBar from "./SideBar";
+import Home from "../pages/home/Home";
+import SignIn from "../pages/auth/SignIn";
+import SignUp from "../pages/auth/SignUp";
+import { Link } from "react-router-dom";
 import { Menu } from "antd";
 import {
   FireOutlined,
@@ -26,16 +30,22 @@ const NavBar = () => {
       selectedKeys={[current]}
     >
       <Item id="brand" key="brand" icon={<FireOutlined />}>
-        Brand
+        <Link to="/" element={<Home />}>
+          Brand
+        </Link>
       </Item>
       <Item className="nav-item" key="sidebar">
         <SideBar />
       </Item>
       <Item className="nav-item" key="signin" icon={<LoginOutlined />}>
-        Sign In
+        <Link to="signin" element={<SignIn />}>
+          Sign In
+        </Link>
       </Item>
       <Item className="nav-item" key="signup" icon={<UserAddOutlined />}>
-        Sign Up
+        <Link to="signup" element={<SignUp />}>
+          Sign Up
+        </Link>
       </Item>
       <Item className="nav-item" key="???" icon={<UserOutlined />}>
         <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
