@@ -1,4 +1,5 @@
 import React from "react";
+import BottomBar from "./BottomBar";
 import { Menu } from "antd";
 import { CopyrightOutlined } from "@ant-design/icons";
 
@@ -9,9 +10,9 @@ const Footer = () => {
     <Menu
       className="footer"
       mode="horizontal"
-      style={{ border: "3px solid red" }}
+      //   style={{ border: "3px solid red" }}
     >
-      <Item id="brand" key="brand">
+      <Item className="footer-item" key="name">
         {" "}
         <p>
           Created by{" "}
@@ -19,6 +20,21 @@ const Footer = () => {
             Chris Kakos <CopyrightOutlined />{" "}
           </span>{" "}
         </p>
+      </Item>
+      <Item className="footer-item" key="name">
+        {" "}
+        <p>X</p>
+      </Item>
+      <Item className="footer-item" key="name">
+        {" "}
+        <p>Y</p>
+      </Item>
+      <Item className="footer-item" key="name">
+        {" "}
+        <p>Z</p>
+      </Item>
+      <Item id="name" className="footer-item footer-btn" key="bottom">
+        <BottomBar />
       </Item>
     </Menu>
   );
