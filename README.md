@@ -2,8 +2,8 @@
 
 ## Frontend Tools
 
-**[React Router v6](https://reactrouter.com/)**
-
+Routing: **[React Router v6](https://reactrouter.com/)**
+Authentication: **[Firebase](https://firebase.google.com)**
 <br>
 
 ## Backend Tools
