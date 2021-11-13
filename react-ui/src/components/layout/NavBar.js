@@ -26,57 +26,57 @@ const NavBar = () => {
     <Menu
       className="navbar"
       mode="horizontal"
-      onClick={handleOnNavLink}
       selectedKeys={[current]}
+      onClick={handleOnNavLink}
     >
       <Item id="brand" key="brand" icon={<FireOutlined />}>
         <Link to="/" element={<Home />}>
           Brand
         </Link>
       </Item>
-      <Item className="nav-item" key="sidebar">
+      <Item className="navbar-item" key="sidebar">
         <SideBar />
       </Item>
-      <Item className="nav-item" key="signin" icon={<LoginOutlined />}>
+      <Item className="navbar-item" key="signin" icon={<LoginOutlined />}>
         <Link to="signin" element={<SignIn />}>
           Sign In
         </Link>
       </Item>
-      <Item className="nav-item" key="signup" icon={<UserAddOutlined />}>
+      <Item className="navbar-item" key="signup" icon={<UserAddOutlined />}>
         <Link to="signup" element={<SignUp />}>
           Sign Up
         </Link>
       </Item>
-      <Item className="nav-item" key="???" icon={<UserOutlined />}>
+      <Item className="navbar-item" key="???" icon={<UserOutlined />}>
         <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
           Dashboard
         </a>
       </Item>
       <SubMenu
-        className="nav-item"
+        className="navbar-item"
         key="SubMenu"
         icon={<UserOutlined />}
         title="Options"
       >
         <ItemGroup title="Item 1">
-          <Item className="nav-sub-item" key="setting:1">
+          <Item className="navbar-sub-item" key="setting:1">
             Option 1
           </Item>
-          <Item className="nav-sub-item" key="setting:2">
+          <Item className="navbar-sub-item" key="setting:2">
             Option 2
           </Item>
         </ItemGroup>
         <ItemGroup title="Item 2">
-          <Item className="nav-sub-item" key="setting:3">
+          <Item className="navbar-sub-item" key="setting:3">
             Option 3
           </Item>
-          <Item className="nav-sub-item" key="setting:4">
+          <Item className="navbar-sub-item" key="setting:4">
             Option 4
           </Item>
         </ItemGroup>
         <ItemGroup title="Item 3">
           <Item
-            className="nav-sub-item"
+            className="navbar-sub-item"
             key="signout"
             icon={<LogoutOutlined />}
           >
