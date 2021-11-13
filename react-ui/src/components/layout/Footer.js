@@ -21,15 +21,15 @@ const Footer = () => {
           </span>{" "}
         </p>
       </Item>
-      <Item className="footer-item" key="name">
+      <Item className="footer-item" key="x">
         {" "}
         <p>X</p>
       </Item>
-      <Item className="footer-item" key="name">
+      <Item className="footer-item" key="y">
         {" "}
         <p>Y</p>
       </Item>
-      <Item className="footer-item" key="name">
+      <Item className="footer-item" key="z">
         {" "}
         <p>Z</p>
       </Item>
