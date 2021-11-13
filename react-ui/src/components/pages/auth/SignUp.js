@@ -80,6 +80,22 @@ const SignUp = () => {
         }}
         scrollToFirstError
       >
+        {/* USERNAME */}
+        <Item
+          className="form-item"
+          name="username"
+          label="Username"
+          tooltip="What should we call you?"
+          rules={[
+            {
+              required: true,
+              message: "Please input your knickname!",
+              whitespace: true,
+            },
+          ]}
+        >
+          <Input />
+        </Item>
         {/* EMAIL */}
         <Item
           className="form-item"
@@ -139,22 +155,6 @@ const SignUp = () => {
           ]}
         >
           <Input.Password />
-        </Item>
-        {/* USERNAME */}
-        <Item
-          className="form-item"
-          name="knickname"
-          label="Knickname"
-          tooltip="What should we call you?"
-          rules={[
-            {
-              required: true,
-              message: "Please input your knickname!",
-              whitespace: true,
-            },
-          ]}
-        >
-          <Input />
         </Item>
         {/* FAVORITE TEAM */}
         <Item
