@@ -75,14 +75,41 @@
   border: 3px solid blue;
 }
 
-.signup .signup-form {
+.signup-form {
+  display: flex;
+  justify-content: center;
+  padding: 0 2em 0 2em;
+  margin: 1em 0;
   border: 3px solid green;
 }
 
-.form-item {
-  /* padding: 5em 0; */
-  margin-right: 25%;
+.signup-form-item {
+  margin: 0.05em 1.25em;
 }
+
+.signup-form-input {
+  text-align: center;
+}
+/* ********** 2 ************** */
+.signup-form-2 {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  border: 3px solid green;
+}
+
+.signup-form-item-2 {
+  margin-right: 20%;
+}
+/* ********** 2 ************** */
+
+.signup-form-btn {
+  margin-top: 1em;
+}
+
+/* .site-form-item-icon {
+  text-align: center;
+} */
 
 .signin {
   display: flex;
@@ -108,6 +135,5 @@
 
 .signin-form-item {
   margin-right: 25%;
-
   /* border: 3px solid red; */
 }
