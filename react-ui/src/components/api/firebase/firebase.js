@@ -1,6 +1,12 @@
-import * as firebase from "firebase/firebase";
+// Firebase v9.4 imports
+import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+  sendSignInLinkToEmail,
+  GoogleAuthProvider,
+} from "firebase/auth";
 
-const config = {
+const firebaseConfig = {
   apiKey: "AIzaSyA-rue-O4kbJIFNEmI91Dr07cNMcULe5aY",
   authDomain: "proto-site-2021-10-29.firebaseapp.com",
   projectId: "proto-site-2021-10-29",
@@ -10,8 +16,13 @@ const config = {
 };
 
 // initialize
-firebase.initializeApp(config);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+console.log("api/firebase: auth -> ", auth);
 
-// firebase functionality
-export const auth = firebase.auth(); // login a registered user
-export const googleOAuthProvider = new firebase.auth.googleOAuthProvider(); // login in with google
+export const provider = new GoogleAuthProvider();
+console.log("api/firebase: provider -> ", provider);
+
+export const sendVerificationLink = async (email, options) => {
+  await sendSignInLinkToEmail(auth, email, options);
+};
