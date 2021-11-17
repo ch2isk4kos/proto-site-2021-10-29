@@ -1,5 +1,20 @@
 import React, { useState } from "react";
-import { Form, Input, Checkbox, Button, AutoComplete } from "antd";
+import { sendVerificationLink } from "../../api/firebase/firebase";
+import {
+  Form,
+  Input,
+  Checkbox,
+  Button,
+  notification,
+  Divider,
+  Space,
+} from "antd";
+import {
+  RadiusUpleftOutlined,
+  RadiusUprightOutlined,
+  RadiusBottomleftOutlined,
+  RadiusBottomrightOutlined,
+} from "@ant-design/icons";
 
 const { Item } = Form;
 
@@ -44,17 +59,49 @@ const SignUp2 = () => {
   console.log("form:", form);
 
   const handleOnChange = (value) => {
-    console.log("value:", value);
-    console.log("form.getFieldsValue(value):", form.getFieldsValue(value));
     let input = form.getFieldsValue(value);
     setSignUpData(input);
     console.log("signUpData:", signUpData);
   };
 
+  const openNotification = (placement) => {
+    notification.info({
+      message: `Confirm Your Email`,
+      description: "Check your email address to complete your registration.",
+      placement,
+    });
+  };
+
   const handleOnSubmit = (values) => {
-    console.log("Received form: ", form);
     console.log("Received values of form: ", values);
+
+    let { username, email } = values;
+
+    const firebaseConfig = {
+      url: "http://localhost:3000/signup/verified",
+      handleCodeInApp: true,
+    };
+
+    // send email address to firebase api
+    sendVerificationLink(email, firebaseConfig);
+    // save email to local storage
+    window.localStorage.setItem("email", email);
+    window.localStorage.setItem("username", username);
+    // clear form fields
     form.resetFields();
+    // empty state
+    setSignUpData({
+      username: "",
+      email: "",
+    });
+    // display instructions
+    openNotification("topRight");
+  };
+
+  const handleOnSubmitFail = (list) => {
+    console.log("list:", list);
+    console.log("list.errorFields:", list.errorFields);
+    list.errorFields.map((e) => alert(e.errors));
   };
 
   return (
@@ -67,6 +114,7 @@ const SignUp2 = () => {
         form={form}
         initialValues={{ username: "", email: "" }}
         onValuesChange={handleOnChange}
+        onFinishFailed={handleOnSubmitFail}
         onFinish={handleOnSubmit}
         scrollToFirstError
       >
@@ -126,7 +174,7 @@ const SignUp2 = () => {
         {/* SUBMIT BUTTON */}
         <Item className="signup-form-item-2" {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
-            Register
+            Confirm
           </Button>
         </Item>
       </Form>
