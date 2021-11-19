@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { sendVerificationLink } from "../../api/firebase/firebase";
+import { sendVerificationLink } from "../../api/firebase/config";
 import {
   Form,
   Input,
@@ -51,17 +51,14 @@ const tailFormItemLayout = {
 
 const SignUp2 = () => {
   const [form] = Form.useForm();
-  const [signUpData, setSignUpData] = useState({
-    username: "",
-    email: "",
-  });
+  const [email, setEmail] = useState("");
 
   console.log("form:", form);
 
   const handleOnChange = (value) => {
     let input = form.getFieldsValue(value);
-    setSignUpData(input);
-    console.log("signUpData:", signUpData);
+    setEmail(input);
+    console.log("signUpData:", email);
   };
 
   const openNotification = (placement) => {
@@ -75,7 +72,7 @@ const SignUp2 = () => {
   const handleOnSubmit = (values) => {
     console.log("Received values of form: ", values);
 
-    let { username, email } = values;
+    let { email } = values;
 
     const firebaseConfig = {
       url: "http://localhost:3000/signup/verified",
@@ -86,14 +83,10 @@ const SignUp2 = () => {
     sendVerificationLink(email, firebaseConfig);
     // save email to local storage
     window.localStorage.setItem("email", email);
-    window.localStorage.setItem("username", username);
     // clear form fields
     form.resetFields();
     // empty state
-    setSignUpData({
-      username: "",
-      email: "",
-    });
+    setEmail("");
     // display instructions
     openNotification("topRight");
   };
@@ -112,28 +105,12 @@ const SignUp2 = () => {
         className="signup-form-2"
         name="register"
         form={form}
-        initialValues={{ username: "", email: "" }}
+        initialValues={{ email: "" }}
         onValuesChange={handleOnChange}
         onFinishFailed={handleOnSubmitFail}
         onFinish={handleOnSubmit}
         scrollToFirstError
       >
-        {/* USERNAME */}
-        <Item
-          className="signup-form-item-2"
-          name="username"
-          label="Username"
-          tooltip="What name do you go by?"
-          rules={[
-            {
-              required: true,
-              message: "Please input your username",
-              whitespace: true,
-            },
-          ]}
-        >
-          <Input type="text" required />
-        </Item>
         {/* EMAIL */}
         <Item
           className="signup-form-item-2"
@@ -173,9 +150,11 @@ const SignUp2 = () => {
         </Item>
         {/* SUBMIT BUTTON */}
         <Item className="signup-form-item-2" {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Confirm
-          </Button>
+          <Space>
+            <Button type="primary" htmlType="submit">
+              Confirm
+            </Button>
+          </Space>
         </Item>
       </Form>
     </div>
