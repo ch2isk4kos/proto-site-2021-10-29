@@ -2,6 +2,8 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
+  isSignInWithEmailLink,
+  // onAuthStateChanged,
   sendSignInLinkToEmail,
   signInWithEmailLink,
   GoogleAuthProvider,
@@ -31,9 +33,29 @@ export const sendVerificationLink = async (email, options) => {
 
 // signin
 export const signInWithEmail = async (email, location) => {
-  await signInWithEmailLink(email, location);
+  await signInWithEmailLink(auth, email, location);
 };
+
+// export const signInWithEmail = async (email, location) => {
+//   const options = {
+//     url: location,
+//     handleCodeInApp: true,
+//   };
+//   await sendSignInLinkToEmail(auth, email, options);
+//   // Obtain emailLink from the user.
+//   if (isSignInWithEmailLink(auth, location)) {
+//     await signInWithEmailLink(email, email, location);
+//   }
+// };
 
 // create/update user
 
-// current user
+// current user: https://firebase.google.com/docs/auth/web/manage-users
+// const getCurrentUser = async (user) => {
+//   await onAuthStateChanged(auth, (u) => {
+//     if ()
+//   })
+// }
+export const getCurrentUser = () => {
+  return !!auth.currentUser;
+};

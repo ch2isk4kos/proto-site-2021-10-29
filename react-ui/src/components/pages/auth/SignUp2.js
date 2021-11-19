@@ -72,17 +72,16 @@ const SignUp2 = () => {
   const handleOnSubmit = (values) => {
     console.log("Received values of form: ", values);
 
-    let { email } = values;
-
     const firebaseConfig = {
       url: "http://localhost:3000/signup/verified",
+      // url: `${process.env.REACT_APP_REGISTER_REDIRECT_URL}`,
       handleCodeInApp: true,
     };
 
     // send email address to firebase api
-    sendVerificationLink(email, firebaseConfig);
+    sendVerificationLink(values.email, firebaseConfig);
     // save email to local storage
-    window.localStorage.setItem("email", email);
+    window.localStorage.setItem("email", values.email);
     // clear form fields
     form.resetFields();
     // empty state

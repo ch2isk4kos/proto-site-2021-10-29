@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { signInWithEmail } from "../../api/firebase/config";
-import { Form, Input, Button, Checkbox, message } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { getCurrentUser, signInWithEmail } from "../../api/firebase/config";
+import { Form, Input, Button, Checkbox, Row, Col, message } from "antd";
+import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 
 const { Item } = Form;
 
@@ -18,12 +18,12 @@ const tailFormItemLayout = {
   },
 };
 
-const SignUp2Form = () => {
+const SignUp2Form = ({ history }) => {
   const [form] = Form.useForm();
   const [, forceUpdate] = useState({}); // To disable submit button at the beginning.
   const [signUpData, setSignUpData] = useState({
     // email: `${window.localStorage.getItem("email")}}`,
-    email: "",
+    email: window.localStorage.getItem("email"),
     username: "",
     password: "",
     agreement: false,
@@ -41,17 +41,20 @@ const SignUp2Form = () => {
   const handleOnChange = (value) => {
     let input = form.getFieldsValue(value);
     setSignUpData({ email: signUpData.email, ...input });
-    console.log("value:", value);
-    console.log("input:", input);
-    console.log("signUpData:", signUpData);
+    // console.log("value:", value);
+    // console.log("input:", input);
+    // console.log("signUpData:", signUpData);
   };
 
   const handleOnSubmit = (values) => {
     console.log("Finish:", values);
     console.log("signUpData", signUpData);
     console.log("window.location.href", window.location.href);
-    const { email, password, username } = signUpData;
-    // form.resetFields();
+    // const { email, password, username } = signUpData;
+    const auth = signInWithEmail(signUpData.email, window.location.href);
+    console.log("SU2Form -> auth:", auth);
+
+    form.resetFields();
   };
 
   const handleOnSubmitError = (errorInfo) => {
@@ -84,8 +87,8 @@ const SignUp2Form = () => {
         {/* Email */}
         <Item className="signin-form-item" label="Email">
           <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder={signUpData.email}
+            prefix={<MailOutlined className="site-form-item-icon" />}
+            placeholder={signUpData && signUpData.email}
             disabled
           />
         </Item>
@@ -94,7 +97,7 @@ const SignUp2Form = () => {
           className="signin-form-item"
           label="Username"
           name="username"
-          tooltip="What do you want others to call you?"
+          tooltip="What should we call you?"
           rules={[
             {
               required: true,
@@ -111,8 +114,9 @@ const SignUp2Form = () => {
         {/* Password */}
         <Item
           className="signin-form-item"
-          label="Password"
           name="password"
+          label="Password"
+          tooltip="Enter a secure password"
           rules={[
             {
               required: true,
@@ -132,7 +136,6 @@ const SignUp2Form = () => {
         >
           <Input.Password
             prefix={<LockOutlined className="site-form-item-icon" />}
-            required
           />
         </Item>
         {/* Confirm Password */}
@@ -141,7 +144,7 @@ const SignUp2Form = () => {
           name="confirm"
           label="Confirm"
           dependencies={["password"]}
-          hasFeedback
+          tooltip="Confirm password"
           rules={[
             {
               required: true,
@@ -159,10 +162,10 @@ const SignUp2Form = () => {
               },
             }),
           ]}
+          hasFeedback
         >
           <Input.Password
             prefix={<LockOutlined className="site-form-item-icon" />}
-            required
           />
         </Item>
         {/* Agreement Checkbox */}
