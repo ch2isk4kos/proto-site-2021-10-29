@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmail, updateUserPassword } from "../../api/firebase/config";
+import {
+  getUserIdToken,
+  signInWithEmail,
+  updateUserPassword,
+} from "../../api/firebase/config";
 import { Form, Input, Button, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 
@@ -41,8 +45,16 @@ const SignUpForm = ({ history }) => {
 
   const openNotification = (placement) => {
     notification.info({
-      message: `Welcome Aboard ${signUpData.username}!`,
+      message: `Welcome aboard ${signUpData.username}!`,
       description: "We're happy to have you apart of the platform.",
+      placement,
+    });
+  };
+
+  const openNotificationError = (err, placement) => {
+    notification.info({
+      message: `Something went wrong!`,
+      description: err,
       placement,
     });
   };
@@ -62,10 +74,15 @@ const SignUpForm = ({ history }) => {
             // get current user
             let currentUser = res.user.auth.currentUser;
             console.log("current user:", currentUser);
-            // update user password
+            // update current user password
             updateUserPassword(currentUser, signUpData.password);
-            // ??? get user id from jwt
-            // ??? create or update user and dispatch payload to action creator (redux store)
+            // get web token of current user
+            getUserIdToken(currentUser).then((res) => {
+              console.log("res:", res);
+              console.log("res.token:", res.token);
+            });
+            // ??? create or update current user and dispatch payload to action creator (redux store)
+
             // clear user input fields
             form.resetFields();
             // render notification
@@ -77,6 +94,7 @@ const SignUpForm = ({ history }) => {
       );
     } catch (err) {
       console.log(err);
+      openNotificationError(err, "topRight");
     }
   };
 
