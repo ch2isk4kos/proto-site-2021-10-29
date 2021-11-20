@@ -8,8 +8,6 @@ State Management: **[Redux](https://redux.js.org/)**<br />
 
 ## Backend Tools
 
-<br />
-
 ## Utilities
 
 Authorization: **[JWT](https://jwt.io/)**<br />
