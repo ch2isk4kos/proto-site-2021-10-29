@@ -51,21 +51,12 @@ const SignUp2Form = ({ history }) => {
   const handleOnChange = (value) => {
     let input = form.getFieldsValue(value);
     setSignUpData({ email: signUpData.email, ...input });
-    // console.log("value:", value);
-    // console.log("input:", input);
-    // console.log("signUpData:", signUpData);
   };
 
-  const handleOnSubmit = async (values) => {
-    console.log("Finish:", values);
-    console.log("signUpData", signUpData);
-    console.log("window.location.href", window.location.href);
-    // const { email, password, username } = signUpData;
+  const handleOnSubmit = async () => {
     try {
       await signInWithEmail(signUpData.email, window.location.href).then(
         (res) => {
-          // return console.log(res);
-          console.log(res);
           if (!!res.user.emailVerified) {
             // remove user email from the browser store
             window.localStorage.removeItem("email");
