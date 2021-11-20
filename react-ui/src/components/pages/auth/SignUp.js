@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { sendVerificationLink } from "../../api/firebase/config";
+import { sendVerificationLink } from "../../api/firebase/helpers";
 import {
   Form,
   Input,

@@ -4,7 +4,7 @@ import {
   getUserIdToken,
   signInWithEmail,
   updateUserPassword,
-} from "../../api/firebase/config";
+} from "../../api/firebase/helpers";
 import { Form, Input, Button, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 
