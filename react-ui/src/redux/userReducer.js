@@ -1,9 +1,13 @@
 export const userReducer = (state = null, action) => {
   switch (action.type) {
-    case "LOGGED_IN_USER":
+    case "CURRENT_USER":
+      return action.payload;
+    case "LOGOUT":
       return action.payload;
     default:
+      return state;
   }
 };
 
-// actionType = "LOGGED_IN_USER"
+// actionType = "CURRENT_USER"
+// action.payload ~> updated user state
