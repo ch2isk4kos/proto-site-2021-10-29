@@ -6,6 +6,7 @@ import {
   // onAuthStateChanged,
   sendSignInLinkToEmail,
   signInWithEmailLink,
+  updatePassword,
   GoogleAuthProvider,
 } from "firebase/auth";
 
@@ -34,6 +35,11 @@ export const sendVerificationLink = (email, options) => {
 // signin
 export const signInWithEmail = (email, location) => {
   return signInWithEmailLink(auth, email, location);
+};
+
+// update password
+export const updateUserPassword = (user, password) => {
+  return updatePassword(user, password);
 };
 
 // export const signInWithEmail = async (email, location) => {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getCurrentUser, signInWithEmail } from "../../api/firebase/config";
-import { Form, Input, Button, Checkbox, Row, Col, message } from "antd";
+import { signInWithEmail, updateUserPassword } from "../../api/firebase/config";
+// import { history } from "history";
+import { useNavigate } from "react-router-dom";
+import { Form, Input, Button, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 
 const { Item } = Form;
@@ -28,6 +30,7 @@ const SignUp2Form = ({ history }) => {
     password: "",
     agreement: false,
   });
+  let navigate = useNavigate();
 
   useEffect(() => {
     forceUpdate({});
@@ -37,6 +40,14 @@ const SignUp2Form = ({ history }) => {
     setSignUpData({ email: window.localStorage.getItem("email") });
     console.log("SignUp2Form -> signUpData:", signUpData);
   }, []);
+
+  const openNotification = (placement) => {
+    notification.info({
+      message: `Welcome Aboard ${signUpData.username}!`,
+      description: "We're happy to have you apart of the platform.",
+      placement,
+    });
+  };
 
   const handleOnChange = (value) => {
     let input = form.getFieldsValue(value);
@@ -54,14 +65,30 @@ const SignUp2Form = ({ history }) => {
     try {
       await signInWithEmail(signUpData.email, window.location.href).then(
         (res) => {
-          return console.log(res);
+          // return console.log(res);
+          console.log(res);
+          if (!!res.user.emailVerified) {
+            // remove user email from the browser store
+            window.localStorage.removeItem("email");
+            // get current user
+            let currentUser = res.user.auth.currentUser;
+            console.log("current user:", currentUser);
+            // update user password
+            updateUserPassword(currentUser, signUpData.password);
+            // ??? get user id from jwt
+            // ??? create or update user and dispatch payload to action creator (redux store)
+            // clear user input fields
+            form.resetFields();
+            // render notification
+            openNotification("topRight");
+            // redirect user home
+            navigate("/");
+          }
         }
       );
     } catch (err) {
       console.log(err);
     }
-
-    form.resetFields();
   };
 
   const handleOnSubmitError = (errorInfo) => {
