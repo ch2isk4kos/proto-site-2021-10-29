@@ -4,7 +4,7 @@
 
 Authentication: **[Firebase v9](https://firebase.google.com)**<br />
 Routing: **[React Router v6](https://reactrouter.com/)**<br />
-State Management: **[Redux](https://redux.js.org/)**<br />
+State Management: **[Redux](https://redux.js.org/)** + **[React Redux](https://react-redux.js.org/)**<br />
 
 ## Backend Tools
 
