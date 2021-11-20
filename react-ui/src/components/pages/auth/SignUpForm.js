@@ -80,15 +80,15 @@ const SignUpForm = ({ history }) => {
             getUserIdToken(currentUser).then((res) => {
               console.log("res:", res);
               console.log("res.token:", res.token);
+              // ??? create or update current user and dispatch payload to action creator (redux store)
             });
-            // ??? create or update current user and dispatch payload to action creator (redux store)
 
             // clear user input fields
             form.resetFields();
-            // render notification
-            openNotification("topRight");
             // redirect user home
             navigate("/");
+            // render notification
+            openNotification("topRight");
           }
         }
       );
