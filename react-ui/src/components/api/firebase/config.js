@@ -27,13 +27,13 @@ export const provider = new GoogleAuthProvider();
 console.log("api/firebase: provider -> ", provider);
 
 // signup
-export const sendVerificationLink = async (email, options) => {
-  await sendSignInLinkToEmail(auth, email, options);
+export const sendVerificationLink = (email, options) => {
+  return sendSignInLinkToEmail(auth, email, options);
 };
 
 // signin
-export const signInWithEmail = async (email, location) => {
-  await signInWithEmailLink(auth, email, location);
+export const signInWithEmail = (email, location) => {
+  return signInWithEmailLink(auth, email, location);
 };
 
 // export const signInWithEmail = async (email, location) => {

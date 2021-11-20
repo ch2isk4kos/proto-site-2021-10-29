@@ -46,13 +46,20 @@ const SignUp2Form = ({ history }) => {
     // console.log("signUpData:", signUpData);
   };
 
-  const handleOnSubmit = (values) => {
+  const handleOnSubmit = async (values) => {
     console.log("Finish:", values);
     console.log("signUpData", signUpData);
     console.log("window.location.href", window.location.href);
     // const { email, password, username } = signUpData;
-    const auth = signInWithEmail(signUpData.email, window.location.href);
-    console.log("SU2Form -> auth:", auth);
+    try {
+      await signInWithEmail(signUpData.email, window.location.href).then(
+        (res) => {
+          return console.log(res);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
 
     form.resetFields();
   };
