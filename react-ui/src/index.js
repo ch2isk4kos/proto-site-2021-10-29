@@ -4,9 +4,13 @@ import { BrowserRouter } from "react-router-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { rootReducer } from "./redux/index";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
+
+// redux store
+const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
   // <React.StrictMode>
