@@ -1,4 +1,4 @@
-# React + [Ant Design](https://ant.design/)
+# [React](https://reactjs.org/) + [Ant Design](https://ant.design/)
 
 ## Frontend Tools
 
