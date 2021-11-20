@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { signInWithEmail, updateUserPassword } from "../../api/firebase/config";
-// import { history } from "history";
 import { useNavigate } from "react-router-dom";
+import { signInWithEmail, updateUserPassword } from "../../api/firebase/config";
 import { Form, Input, Button, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 
