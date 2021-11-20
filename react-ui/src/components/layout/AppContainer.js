@@ -1,9 +1,8 @@
 import React from "react";
 import Home from "../pages/home/Home";
 import SignIn from "../pages/auth/SignIn";
-// import SignUp from "../pages/auth/SignUp";
-import SignUp2 from "../pages/auth/SignUp2";
-import SignUp2Form from "../pages/auth/SignUp2Form";
+import SignUp from "../pages/auth/SignUp";
+import SignUpForm from "../pages/auth/SignUpForm";
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "antd";
 
@@ -16,8 +15,8 @@ const AppContainer = () => {
         <Routes>
           <Route path="/*" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp2 />} />
-          <Route path="/signup/verified" element={<SignUp2Form />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup/verified" element={<SignUpForm />} />
         </Routes>
       </div>
     </Content>

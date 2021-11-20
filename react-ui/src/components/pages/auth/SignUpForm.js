@@ -19,11 +19,10 @@ const tailFormItemLayout = {
   },
 };
 
-const SignUp2Form = ({ history }) => {
+const SignUpForm = ({ history }) => {
   const [form] = Form.useForm();
   const [, forceUpdate] = useState({}); // To disable submit button at the beginning.
   const [signUpData, setSignUpData] = useState({
-    // email: `${window.localStorage.getItem("email")}}`,
     email: window.localStorage.getItem("email"),
     username: "",
     password: "",
@@ -232,4 +231,4 @@ const SignUp2Form = ({ history }) => {
   );
 };
 
-export default SignUp2Form;
+export default SignUpForm;
