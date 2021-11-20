@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { sendVerificationLink } from "../../api/firebase/config";
 import {
   Form,
@@ -52,6 +53,7 @@ const tailFormItemLayout = {
 const SignUp = () => {
   const [form] = Form.useForm();
   const [email, setEmail] = useState("");
+  let navigate = useNavigate();
 
   console.log("form:", form);
 
@@ -86,6 +88,8 @@ const SignUp = () => {
     form.resetFields();
     // empty state
     setEmail("");
+    // redirect home
+    navigate("/");
     // display instructions
     openNotification("topRight");
   };
@@ -126,7 +130,7 @@ const SignUp = () => {
             },
           ]}
         >
-          <Input type="email" required />
+          <Input type="email" autoFocus required />
         </Item>
         {/* AGREEMENT */}
         <Item
