@@ -3,7 +3,13 @@
 ## Frontend Tools
 
 Authentication: **[Firebase v9](https://firebase.google.com)**<br />
-Authorization: **[JWT](https://jwt.io/)**<br />
 Routing: **[React Router v6](https://reactrouter.com/)**<br />
+State Management: **[Redux](https://redux.js.org/)**<br />
 
 ## Backend Tools
+
+<br />
+
+## Utilities
+
+Authorization: **[JWT](https://jwt.io/)**<br />
