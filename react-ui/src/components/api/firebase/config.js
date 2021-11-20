@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
+  getIdTokenResult,
   isSignInWithEmailLink,
   // onAuthStateChanged,
   sendSignInLinkToEmail,
@@ -40,6 +41,11 @@ export const signInWithEmail = (email, location) => {
 // update password
 export const updateUserPassword = (user, password) => {
   return updatePassword(user, password);
+};
+
+// get user id token
+export const getUserIdToken = (user) => {
+  return getIdTokenResult(user, true);
 };
 
 // export const signInWithEmail = async (email, location) => {
