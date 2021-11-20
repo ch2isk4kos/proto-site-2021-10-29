@@ -82,7 +82,6 @@ const SignUpForm = ({ history }) => {
               console.log("res.token:", res.token);
               // ??? create or update current user and dispatch payload to action creator (redux store)
             });
-
             // clear user input fields
             form.resetFields();
             // redirect user home
