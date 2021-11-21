@@ -116,8 +116,8 @@ const SignIn = () => {
             type="primary"
             htmlType="submit"
             disabled={
-              (signInData && !signInData.email) ||
-              !signInData.password ||
+              !(signInData.email && signInData.password) ||
+              signInData.password.length < 6 ||
               !!form.getFieldsError().filter(({ errors }) => errors.length)
                 .length
             }
