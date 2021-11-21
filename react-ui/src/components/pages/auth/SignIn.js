@@ -116,7 +116,8 @@ const SignIn = () => {
             type="primary"
             htmlType="submit"
             disabled={
-              !form.isFieldsTouched(false) ||
+              (signInData && !signInData.email) ||
+              !signInData.password ||
               !!form.getFieldsError().filter(({ errors }) => errors.length)
                 .length
             }
