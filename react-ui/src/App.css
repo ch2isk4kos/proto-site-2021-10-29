@@ -114,11 +114,10 @@
 .signin {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-around; */
   justify-content: center;
   text-align: center;
+  /* align-items: center; */
   margin: 0;
-  /* padding: 2em 0; */
   position: absolute;
   width: 50%;
   height: 100%;
@@ -131,9 +130,22 @@
 
 .signin-form {
   border: 3px solid green;
+  max-width: 100%;
 }
 
 .signin-form-item {
-  margin-right: 25%;
-  /* border: 3px solid red; */
+  margin: 1em 25%;
+}
+
+.signin-form-remember,
+.signin-form-register {
+  float: left;
+}
+
+.signin-form-forgot {
+  float: right;
+}
+
+.signin-form-button {
+  width: 100%;
 }
