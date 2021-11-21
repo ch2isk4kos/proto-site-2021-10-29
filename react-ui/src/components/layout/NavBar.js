@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import SideBar from "./SideBar";
 import Home from "../pages/home/Home";
 import SignIn from "../pages/auth/SignIn";
 import SignUp from "../pages/auth/SignUp";
+import { signOutUser } from "../../api/firebase/helpers";
 import { Link } from "react-router-dom";
 import { Menu } from "antd";
 import {
@@ -17,9 +20,21 @@ const { SubMenu, Item, ItemGroup } = Menu;
 
 const NavBar = () => {
   const [current, setCurrent] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOnNavLink = (e) => {
     setCurrent(e.key);
+  };
+
+  const handleOnSignOut = () => {
+    console.log("signing out...");
+    signOutUser();
+    dispatch({
+      type: "SIGN_OUT",
+      payload: null,
+    });
+    navigate("/signin");
   };
 
   return (
@@ -79,6 +94,7 @@ const NavBar = () => {
             className="navbar-sub-item"
             key="signout"
             icon={<LogoutOutlined />}
+            onClick={handleOnSignOut}
           >
             Sign Out
           </Item>
