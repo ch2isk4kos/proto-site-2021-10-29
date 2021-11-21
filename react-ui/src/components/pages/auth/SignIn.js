@@ -17,6 +17,7 @@ const SignIn = () => {
     remember: true,
   });
   let navigate = useNavigate();
+  const { getFieldDecorator } = form;
 
   useEffect(() => {
     forceUpdate({});
@@ -62,9 +63,12 @@ const SignIn = () => {
           rules={[
             {
               required: true,
-              message: "Please input your Username!",
+              pattern:
+                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+              message: "Please enter your email address!",
             },
           ]}
+          hasFeedback
         >
           <Input
             prefix={<MailOutlined className="site-form-item-icon" />}
@@ -95,7 +99,6 @@ const SignIn = () => {
         >
           <Input.Password
             prefix={<LockOutlined className="site-form-item-icon" />}
-            // type="password"
             placeholder="Password"
           />
         </Item>
