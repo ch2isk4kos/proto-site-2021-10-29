@@ -17,7 +17,6 @@ const SignIn = () => {
     remember: true,
   });
   let navigate = useNavigate();
-  const { getFieldDecorator } = form;
 
   useEffect(() => {
     forceUpdate({});
@@ -45,6 +44,7 @@ const SignIn = () => {
       <Form
         className="signin-form"
         name="normal_login"
+        // name="basic"
         form={form}
         initialValues={{
           email: "",
@@ -66,11 +66,15 @@ const SignIn = () => {
               pattern:
                 /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
               message: "Please enter your email address!",
+              warningOnly: true,
+              type: "string",
+              min: 6,
             },
           ]}
           hasFeedback
         >
           <Input
+            className="signin-form-item-input"
             prefix={<MailOutlined className="site-form-item-icon" />}
             placeholder="email@address.com"
             autoFocus
