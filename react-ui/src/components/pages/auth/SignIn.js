@@ -1,18 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, Input, Button, Checkbox } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import SignUp from "./SignUp";
+import Home from "../home/Home";
 
 const { Item } = Form;
 
 const SignIn = () => {
-  // const [form] = Form.useForm();
+  const [form] = Form.useForm();
+  console.log("Sign In -> form:", form);
   const [, forceUpdate] = useState({}); // To disable submit button at the beginning.
+  const [signInData, setSignInData] = useState({
+    email: "",
+    password: "",
+    remember: true,
+  });
+  let navigate = useNavigate();
 
   useEffect(() => {
     forceUpdate({});
   }, []);
+
+  const handleOnChange = (value) => {
+    console.log("value:", value);
+    let input = form.getFieldsValue(value);
+    console.log("input:", input);
+    setSignInData(input);
+    console.log("signInData:", signInData);
+  };
 
   const handleOnSubmit = (values) => {
     console.log("Finish:", values);
@@ -28,12 +44,18 @@ const SignIn = () => {
       <Form
         className="signin-form"
         name="normal_login"
+        form={form}
         initialValues={{
+          email: "",
+          password: "",
           remember: true,
         }}
+        onValuesChange={handleOnChange}
         onFinish={handleOnSubmit}
         onFinishFailed={handleOnSubmitError}
+        autoComplete="off"
       >
+        {/* Email */}
         <Item
           className="signin-form-item"
           name="email"
@@ -50,6 +72,7 @@ const SignIn = () => {
             autoFocus
           />
         </Item>
+        {/* Password */}
         <Item
           className="signin-form-item"
           name="password"
@@ -58,31 +81,47 @@ const SignIn = () => {
               required: true,
               message: "Please input your Password!",
             },
+            {
+              validator: async (_, value) => {
+                if (!value || value.length < 6) {
+                  return Promise.reject(
+                    new Error("Password must be at least 6 characters")
+                  );
+                }
+              },
+            },
           ]}
+          hasFeedback
         >
-          <Input
+          <Input.Password
             prefix={<LockOutlined className="site-form-item-icon" />}
-            type="password"
+            // type="password"
             placeholder="Password"
           />
         </Item>
+        {/* Remember Me */}
         <Item className="signin-form-item">
           <Item name="remember" valuePropName="checked" noStyle>
             <Checkbox className="signin-form-remember">Remember me</Checkbox>
           </Item>
-
-          <a className="signin-form-forgot" href="">
+          {/* Forgot Password */}
+          <Link className="signin-form-forgot" to="/" element={<Home />}>
             Forgot password
-          </a>
+          </Link>
         </Item>
-
-        <Item className="signin-form-item">
+        {/* Signin Button */}
+        <Item className="signin-form-item" shouldUpdate>
           <Button
             className="signin-form-button"
             type="primary"
             htmlType="submit"
+            disabled={
+              !form.isFieldsTouched(false) ||
+              !!form.getFieldsError().filter(({ errors }) => errors.length)
+                .length
+            }
           >
-            Log in
+            Sign In
           </Button>
           <span className="signin-form-register">
             Or{" "}
