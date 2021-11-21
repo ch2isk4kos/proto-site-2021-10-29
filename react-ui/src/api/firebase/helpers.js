@@ -3,9 +3,10 @@ import {
   getAuth,
   getIdTokenResult,
   isSignInWithEmailLink,
-  // onAuthStateChanged,
+  onAuthStateChanged,
   sendSignInLinkToEmail,
   signInWithEmailLink,
+  signOut,
   updatePassword,
   GoogleAuthProvider,
 } from "firebase/auth";
@@ -29,6 +30,27 @@ export const updateUserPassword = (user, password) => {
 export const getUserIdToken = (user) => {
   return getIdTokenResult(user, true);
 };
+
+// sign out
+export const signOutUser = () => {
+  return signOut(auth);
+};
+
+// listen for user state change
+// export const listenForChangesToUserState = () => {
+//   return onAuthStateChanged(auth, async (user) => {
+//     if (!!user) {
+//       // getIdTokenResult(user).then((res) => {
+//       //   console.log(
+//       //     "helpers -> listenForUserStateChange -> getIdTokenResult -> res:",
+//       //     res
+//       //   );
+//       //   return res.token;
+//       // });
+//       return user;
+//     }
+//   });
+// };
 
 // export const signInWithEmail = async (email, location) => {
 //   const options = {
