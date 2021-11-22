@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Input, Button, Checkbox } from "antd";
+import { useDispatch } from "react-redux";
+import { Form, Input, Button, Checkbox, notification } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
+import { signInLocally, getUserIdToken } from "../../../api/firebase/helpers";
 import SignUp from "./SignUp";
 import Home from "../home/Home";
 
@@ -9,29 +11,67 @@ const { Item } = Form;
 
 const SignIn = () => {
   const [form] = Form.useForm();
-  console.log("Sign In -> form:", form);
   const [, forceUpdate] = useState({}); // To disable submit button at the beginning.
   const [signInData, setSignInData] = useState({
     email: "",
     password: "",
     remember: true,
+    isLoading: false,
   });
+  const dispatch = useDispatch();
   let navigate = useNavigate();
 
   useEffect(() => {
     forceUpdate({});
   }, []);
 
-  const handleOnChange = (value) => {
-    console.log("value:", value);
-    let input = form.getFieldsValue(value);
-    console.log("input:", input);
-    setSignInData(input);
-    console.log("signInData:", signInData);
+  const openNotification = () => {
+    notification.info({
+      message: `Welcome back ${signInData.email.split("@")[0]}!`,
+      description: "Get caught up on everything you've missed.",
+      placement: "topRight",
+    });
   };
 
-  const handleOnSubmit = (values) => {
-    console.log("Finish:", values);
+  const openNotificationError = (error) => {
+    console.log(error);
+    notification.info({
+      message: `Sign In Error!`,
+      description: error.message,
+      placement: "topRight",
+    });
+  };
+
+  const handleOnChange = (value) => {
+    let input = form.getFieldsValue(value);
+    setSignInData(input);
+  };
+
+  const handleOnSubmit = async (values) => {
+    setSignInData({ isLoading: true, ...values });
+
+    try {
+      const signin = await signInLocally(signInData.email, signInData.password);
+      const { user } = signin;
+      const jwt = await getUserIdToken(user);
+      console.log(jwt);
+      dispatch({
+        type: "SIGN_IN",
+        payload: {
+          email: user.email,
+          token: user.accessToken,
+        },
+      });
+      // clear user input fields
+      form.resetFields();
+      // redirect home
+      navigate("/");
+      // welcome message
+      openNotification();
+    } catch (err) {
+      console.log("ERROR:", err);
+      openNotificationError(err);
+    }
   };
 
   const handleOnSubmitError = (errorInfo) => {
@@ -40,7 +80,7 @@ const SignIn = () => {
 
   return (
     <div className="signin">
-      <h1>Sign In.</h1>
+      {!!signInData.isLoading ? <h1>Signing In...</h1> : <h1>Sign In.</h1>}
       <Form
         className="signin-form"
         name="normal_login"
@@ -50,6 +90,7 @@ const SignIn = () => {
           email: "",
           password: "",
           remember: true,
+          isLoading: false,
         }}
         onValuesChange={handleOnChange}
         onFinish={handleOnSubmit}
