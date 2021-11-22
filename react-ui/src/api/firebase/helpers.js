@@ -6,17 +6,18 @@ import {
   onAuthStateChanged,
   sendSignInLinkToEmail,
   signInWithEmailLink,
+  signInWithEmailAndPassword,
   signOut,
   updatePassword,
   GoogleAuthProvider,
 } from "firebase/auth";
 
-// signup
+// email verificaiton link
 export const sendVerificationLink = (email, options) => {
   return sendSignInLinkToEmail(auth, email, options);
 };
 
-// signin
+// signup
 export const signInWithEmail = (email, location) => {
   return signInWithEmailLink(auth, email, location);
 };
@@ -29,6 +30,11 @@ export const updateUserPassword = (user, password) => {
 // get user id token
 export const getUserIdToken = (user) => {
   return getIdTokenResult(user, true);
+};
+
+// signin
+export const signInLocally = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password);
 };
 
 // sign out
