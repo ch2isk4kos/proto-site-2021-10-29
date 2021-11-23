@@ -3,7 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Form, Input, Button, Checkbox, notification } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
-import { signInLocally, getUserIdToken } from "../../../api/firebase/helpers";
+import {
+  signInLocally,
+  signInWithGoogle,
+  getUserIdToken,
+} from "../../../api/firebase/helpers";
 import SignUp from "./SignUp";
 import Home from "../home/Home";
 
@@ -25,9 +29,9 @@ const SignIn = () => {
     forceUpdate({});
   }, []);
 
-  const openNotification = () => {
+  const openNotification = (user) => {
     notification.info({
-      message: `Welcome back ${signInData.email.split("@")[0]}!`,
+      message: `Welcome back ${user}!`,
       description: "Get caught up on everything you've missed.",
       placement: "topRight",
     });
@@ -67,9 +71,38 @@ const SignIn = () => {
       // redirect home
       navigate("/");
       // welcome message
-      openNotification();
+      openNotification(`${user.email.split("@")[0]}`);
     } catch (err) {
       console.log("ERROR:", err);
+      setSignInData({ isLoading: false, ...values });
+      openNotificationError(err);
+    }
+  };
+
+  const handleOnGoogleSignIn = async (e) => {
+    e.preventDefault();
+    console.log("event:", e);
+    console.log("signing in with Google...");
+
+    try {
+      await signInWithGoogle().then(async (res) => {
+        console.log("google -> res:", res);
+        const { user } = res;
+        console.log("user", user);
+        dispatch({
+          type: "SIGN_IN",
+          payload: {
+            email: user.email,
+            token: user.accessToken,
+          },
+        });
+        // redirect home
+        navigate("/");
+        // welcome message
+        openNotification(user.displayName);
+      });
+    } catch (err) {
+      console.log("Error:", err);
       openNotificationError(err);
     }
   };
@@ -180,6 +213,17 @@ const SignIn = () => {
           </span>
         </Item>
       </Form>
+      {/* Google Signin Button */}
+      <div className="google-signin-button-container">
+        <Button
+          className="google-signin-button"
+          type="primary"
+          htmlType="submit"
+          onClick={handleOnGoogleSignIn}
+        >
+          Sign In With Google
+        </Button>
+      </div>
     </div>
   );
 };
