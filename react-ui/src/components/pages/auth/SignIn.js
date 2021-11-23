@@ -3,11 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Form, Input, Button, Checkbox, notification } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
-import {
-  signInLocally,
-  signInWithGoogle,
-  getUserIdToken,
-} from "../../../api/firebase/helpers";
+import { signInLocally, signInWithGoogle } from "../../../api/firebase/helpers";
 import SignUp from "./SignUp";
 import Home from "../home/Home";
 
@@ -57,8 +53,6 @@ const SignIn = () => {
     try {
       const signin = await signInLocally(signInData.email, signInData.password);
       const { user } = signin;
-      const jwt = await getUserIdToken(user);
-      console.log(jwt);
       dispatch({
         type: "SIGN_IN",
         payload: {
@@ -81,8 +75,6 @@ const SignIn = () => {
 
   const handleOnGoogleSignIn = async (e) => {
     e.preventDefault();
-    console.log("event:", e);
-    console.log("signing in with Google...");
 
     try {
       await signInWithGoogle().then(async (res) => {
@@ -115,7 +107,6 @@ const SignIn = () => {
       <Form
         className="signin-form"
         name="normal_login"
-        // name="basic"
         form={form}
         initialValues={{
           email: "",
@@ -188,7 +179,7 @@ const SignIn = () => {
             Forgot password
           </Link>
         </Item>
-        {/* Signin Button */}
+        {/* Local Signin Button */}
         <Item className="signin-form-item" shouldUpdate>
           <Button
             className="signin-form-button"
