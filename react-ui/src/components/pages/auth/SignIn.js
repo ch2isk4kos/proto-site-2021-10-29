@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Form, Input, Button, Checkbox, notification } from "antd";
-import { LockOutlined, MailOutlined } from "@ant-design/icons";
+import {
+  LockOutlined,
+  MailOutlined,
+  GoogleCircleFilled,
+} from "@ant-design/icons";
 import { signInLocally, signInWithGoogle } from "../../../api/firebase/helpers";
 import SignUp from "./SignUp";
 import Home from "../home/Home";
@@ -208,6 +212,7 @@ const SignIn = () => {
           className="google-signin-button"
           type="primary"
           htmlType="submit"
+          icon={<GoogleCircleFilled />}
           onClick={handleOnGoogleSignIn}
         >
           Sign In With Google
