@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import SideBar from "./SideBar";
 import Home from "../pages/home/Home";
@@ -12,6 +12,7 @@ import {
   FireOutlined,
   LoginOutlined,
   LogoutOutlined,
+  ReadOutlined,
   UserAddOutlined,
   UserOutlined,
 } from "@ant-design/icons";
@@ -20,11 +21,12 @@ const { SubMenu, Item, ItemGroup } = Menu;
 
 const NavBar = () => {
   const [current, setCurrent] = useState("");
+  const { user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleOnNavLink = (e) => {
-    setCurrent(e.key);
+    setCurrent({ current: e.key });
   };
 
   const handleOnSignOut = () => {
@@ -49,57 +51,82 @@ const NavBar = () => {
           Brand
         </Link>
       </Item>
-      <Item className="navbar-item" key="sidebar">
-        <SideBar />
-      </Item>
-      <Item className="navbar-item" key="signin" icon={<LoginOutlined />}>
-        <Link to="signin" element={<SignIn />}>
-          Sign In
+      {/* Articles */}
+      <Item className="navbar-item" key="articles" icon={<ReadOutlined />}>
+        <Link to="articles" element={<SignUp />}>
+          Articles
         </Link>
       </Item>
-      <Item className="navbar-item" key="signup" icon={<UserAddOutlined />}>
-        <Link to="signup" element={<SignUp />}>
-          Sign Up
-        </Link>
-      </Item>
-      <Item className="navbar-item" key="???" icon={<UserOutlined />}>
-        <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-          Dashboard
-        </a>
-      </Item>
-      <SubMenu
-        className="navbar-item"
-        key="SubMenu"
-        icon={<UserOutlined />}
-        title="Options"
-      >
-        <ItemGroup title="Item 1">
-          <Item className="navbar-sub-item" key="setting:1">
-            Option 1
-          </Item>
-          <Item className="navbar-sub-item" key="setting:2">
-            Option 2
-          </Item>
-        </ItemGroup>
-        <ItemGroup title="Item 2">
-          <Item className="navbar-sub-item" key="setting:3">
-            Option 3
-          </Item>
-          <Item className="navbar-sub-item" key="setting:4">
-            Option 4
-          </Item>
-        </ItemGroup>
-        <ItemGroup title="Item 3">
-          <Item
-            className="navbar-sub-item"
-            key="signout"
-            icon={<LogoutOutlined />}
-            onClick={handleOnSignOut}
+      {/* Sign In */}
+      {!user && (
+        <Item className="navbar-item" key="signin" icon={<LoginOutlined />}>
+          <Link to="signin" element={<SignIn />}>
+            Sign In
+          </Link>
+        </Item>
+      )}
+      {/* Sign Up */}
+      {!user && (
+        <Item className="navbar-item" key="signup" icon={<UserAddOutlined />}>
+          <Link to="signup" element={<SignUp />}>
+            Sign Up
+          </Link>
+        </Item>
+      )}
+      {/* Dashboard */}
+      {user && (
+        <Item className="navbar-item" key="???" icon={<UserOutlined />}>
+          <a
+            href="https://ant.design"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Sign Out
-          </Item>
-        </ItemGroup>
-      </SubMenu>
+            Dashboard
+          </a>
+        </Item>
+      )}
+      {/* User Options */}
+      {user && (
+        <SubMenu
+          className="navbar-item"
+          key="SubMenu"
+          icon={<UserOutlined />}
+          title="Options"
+        >
+          <ItemGroup title="Item 1">
+            <Item className="navbar-sub-item" key="setting:1">
+              Option 1
+            </Item>
+            <Item className="navbar-sub-item" key="setting:2">
+              Option 2
+            </Item>
+          </ItemGroup>
+          <ItemGroup title="Item 2">
+            <Item className="navbar-sub-item" key="setting:3">
+              Option 3
+            </Item>
+            <Item className="navbar-sub-item" key="setting:4">
+              Option 4
+            </Item>
+          </ItemGroup>
+          <ItemGroup title="Item 3">
+            <Item
+              className="navbar-sub-item"
+              key="signout"
+              icon={<LogoutOutlined />}
+              onClick={handleOnSignOut}
+            >
+              Sign Out
+            </Item>
+          </ItemGroup>
+        </SubMenu>
+      )}
+      {/* User SideBar */}
+      {user && (
+        <Item className="navbar-item" key="sidebar">
+          <SideBar />
+        </Item>
+      )}
     </Menu>
   );
 };
