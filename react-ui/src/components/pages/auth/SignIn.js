@@ -86,9 +86,7 @@ const SignIn = () => {
 
     try {
       await signInWithGoogle().then(async (res) => {
-        console.log("google -> res:", res);
         const { user } = res;
-        console.log("user", user);
         dispatch({
           type: "SIGN_IN",
           payload: {
