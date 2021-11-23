@@ -33,11 +33,16 @@ const SignUpForm = ({ history }) => {
     password: "",
     agreement: false,
   });
+  const { user } = useSelector((state) => ({ ...state }));
   let navigate = useNavigate();
 
   useEffect(() => {
     forceUpdate({});
   }, []);
+
+  useEffect(() => {
+    if (user && user.token) navigate("/");
+  }, [user, navigate]);
 
   useEffect(() => {
     setSignUpData({ email: window.localStorage.getItem("email") });

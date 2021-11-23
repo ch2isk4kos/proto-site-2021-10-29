@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Input, Button, Checkbox, notification } from "antd";
 import {
   LockOutlined,
@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import { signInLocally, signInWithGoogle } from "../../../api/firebase/helpers";
 import SignUp from "./SignUp";
-import Home from "../home/Home";
+import PasswordReset from "./PasswordReset";
 
 const { Item } = Form;
 
@@ -22,12 +22,17 @@ const SignIn = () => {
     remember: true,
     isLoading: false,
   });
+  const { user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
   useEffect(() => {
     forceUpdate({});
   }, []);
+
+  useEffect(() => {
+    if (user && user.token) navigate("/");
+  }, [user, navigate]);
 
   const openNotification = (user) => {
     notification.info({
@@ -38,7 +43,9 @@ const SignIn = () => {
   };
 
   const openNotificationError = (error) => {
-    console.log(error);
+    console.log("error:", error);
+    console.log("error.message:", error.message);
+    console.log("error.message.type:", error.message.type);
     notification.info({
       message: `Sign In Error!`,
       description: error.message,
@@ -97,12 +104,8 @@ const SignIn = () => {
       });
     } catch (err) {
       console.log("Error:", err);
-      openNotificationError(err);
+      // openNotificationError(err);
     }
-  };
-
-  const handleOnSubmitError = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -120,7 +123,7 @@ const SignIn = () => {
         }}
         onValuesChange={handleOnChange}
         onFinish={handleOnSubmit}
-        onFinishFailed={handleOnSubmitError}
+        // onFinishFailed={handleOnSubmitError}
         autoComplete="off"
       >
         {/* Email */}
@@ -137,6 +140,15 @@ const SignIn = () => {
               type: "string",
               min: 6,
             },
+            // {
+            //   validator: async (_, value) => {
+            //     if (!value || value !== user.email) {
+            //       return Promise.reject(
+            //         new Error("Email address not recognized.")
+            //       );
+            //     }
+            //   },
+            // },
           ]}
           hasFeedback
         >
@@ -179,7 +191,11 @@ const SignIn = () => {
             <Checkbox className="signin-form-remember">Remember me</Checkbox>
           </Item>
           {/* Forgot Password */}
-          <Link className="signin-form-forgot" to="/" element={<Home />}>
+          <Link
+            className="signin-form-forgot"
+            to="/signin/forgot-password"
+            element={<PasswordReset />}
+          >
             Forgot password
           </Link>
         </Item>

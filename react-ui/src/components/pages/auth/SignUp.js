@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { sendVerificationLink } from "../../../api/firebase/helpers";
 import {
   Form,
@@ -53,9 +54,14 @@ const tailFormItemLayout = {
 const SignUp = () => {
   const [form] = Form.useForm();
   const [email, setEmail] = useState("");
+  const { user } = useSelector((state) => ({ ...state }));
   let navigate = useNavigate();
 
   console.log("form:", form);
+
+  useEffect(() => {
+    if (user && user.token) navigate("/");
+  }, [user, navigate]);
 
   const handleOnChange = (value) => {
     let input = form.getFieldsValue(value);
