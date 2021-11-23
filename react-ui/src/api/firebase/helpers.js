@@ -1,4 +1,4 @@
-import { auth } from "./config";
+import { auth, provider } from "./config";
 import {
   getAuth,
   getIdTokenResult,
@@ -7,6 +7,7 @@ import {
   sendSignInLinkToEmail,
   signInWithEmailLink,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updatePassword,
   GoogleAuthProvider,
@@ -35,6 +36,10 @@ export const getUserIdToken = (user) => {
 // signin
 export const signInLocally = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
+};
+
+export const signInWithGoogle = () => {
+  return signInWithPopup(auth, provider);
 };
 
 // sign out
