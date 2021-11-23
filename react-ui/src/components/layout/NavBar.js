@@ -57,19 +57,19 @@ const NavBar = () => {
           Articles
         </Link>
       </Item>
-      {/* Sign In */}
-      {!user && (
-        <Item className="navbar-item" key="signin" icon={<LoginOutlined />}>
-          <Link to="signin" element={<SignIn />}>
-            Sign In
-          </Link>
-        </Item>
-      )}
       {/* Sign Up */}
       {!user && (
         <Item className="navbar-item" key="signup" icon={<UserAddOutlined />}>
           <Link to="signup" element={<SignUp />}>
             Sign Up
+          </Link>
+        </Item>
+      )}
+      {/* Sign In */}
+      {!user && (
+        <Item className="navbar-item" key="signin" icon={<LoginOutlined />}>
+          <Link to="signin" element={<SignIn />}>
+            Sign In
           </Link>
         </Item>
       )}
