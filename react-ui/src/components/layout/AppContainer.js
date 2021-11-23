@@ -3,6 +3,7 @@ import Home from "../pages/home/Home";
 import SignIn from "../pages/auth/SignIn";
 import SignUp from "../pages/auth/SignUp";
 import SignUpForm from "../pages/auth/SignUpForm";
+import PasswordReset from "../pages/auth/PasswordReset";
 import Articles from "../pages/articles/Articles";
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "antd";
@@ -16,6 +17,7 @@ const AppContainer = () => {
         <Routes>
           <Route path="/*" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/signin/forgot-password" element={<PasswordReset />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signup/verified" element={<SignUpForm />} />
           <Route path="/articles" element={<Articles />} />
