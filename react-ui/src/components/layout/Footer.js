@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BottomBar from "./BottomBar";
 import { Menu } from "antd";
 import { CopyrightOutlined } from "@ant-design/icons";
@@ -6,12 +6,14 @@ import { CopyrightOutlined } from "@ant-design/icons";
 const { Item } = Menu;
 
 const Footer = () => {
+  const [current, setCurrent] = useState("");
+
+  const handleOnFooterLink = (e) => {
+    setCurrent({ current: e.key });
+  };
+
   return (
-    <Menu
-      className="footer"
-      mode="horizontal"
-      //   style={{ border: "3px solid red" }}
-    >
+    <Menu className="footer" mode="horizontal" onClick={handleOnFooterLink}>
       <Item className="footer-item" key="name">
         {" "}
         <p>

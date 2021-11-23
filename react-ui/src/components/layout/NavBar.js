@@ -129,11 +129,9 @@ const NavBar = () => {
         </SubMenu>
       )}
       {/* User SideBar */}
-      {user && (
-        <Item className="navbar-item" key="sidebar">
-          <SideBar />
-        </Item>
-      )}
+      <Item className="navbar-item" key="sidebar">
+        <SideBar />
+      </Item>
     </Menu>
   );
 };
