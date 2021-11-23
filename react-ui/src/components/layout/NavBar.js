@@ -13,6 +13,7 @@ import {
   LoginOutlined,
   LogoutOutlined,
   ReadOutlined,
+  ShoppingOutlined,
   UserAddOutlined,
   UserOutlined,
 } from "@ant-design/icons";
@@ -57,6 +58,12 @@ const NavBar = () => {
           Articles
         </Link>
       </Item>
+      {/* Shop */}
+      <Item className="navbar-item" key="shop" icon={<ShoppingOutlined />}>
+        <Link to="/" element={<Home />}>
+          Shop
+        </Link>
+      </Item>
       {/* Sign Up */}
       {!user && (
         <Item className="navbar-item" key="signup" icon={<UserAddOutlined />}>
@@ -93,12 +100,12 @@ const NavBar = () => {
           icon={<UserOutlined />}
           title="Options"
         >
-          <ItemGroup title="Item 1">
+          <ItemGroup title="Dashboard">
             <Item className="navbar-sub-item" key="setting:1">
-              Option 1
+              Profile
             </Item>
             <Item className="navbar-sub-item" key="setting:2">
-              Option 2
+              Cart
             </Item>
           </ItemGroup>
           <ItemGroup title="Item 2">
