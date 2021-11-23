@@ -4,6 +4,7 @@ import {
   getIdTokenResult,
   isSignInWithEmailLink,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   sendSignInLinkToEmail,
   signInWithEmailLink,
   signInWithEmailAndPassword,
@@ -40,6 +41,15 @@ export const signInLocally = (email, password) => {
 
 export const signInWithGoogle = () => {
   return signInWithPopup(auth, provider);
+};
+
+export const sendPasswordReset = (email) => {
+  const config = {
+    url: "http://localhost:3000/signin",
+    // url: `${process.env.REACT_APP_REGISTER_REDIRECT_URL}`,
+    handleCodeInApp: true,
+  };
+  return sendPasswordResetEmail(auth, email, config);
 };
 
 // sign out
@@ -83,6 +93,3 @@ export const signOutUser = () => {
 //     if ()
 //   })
 // }
-export const getCurrentUser = () => {
-  return !!auth.currentUser;
-};
