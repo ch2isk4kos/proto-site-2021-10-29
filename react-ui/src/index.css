@@ -1,12 +1,10 @@
-/* html {
+@import "antd/dist/antd.css";
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
-
-*, *::before, *::after {
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-} */
 
 body {
   margin: 0;
@@ -22,4 +20,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.ant-menu-horizontal {
+  border-bottom: none;
 }
