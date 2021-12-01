@@ -1,12 +1,19 @@
-@import "antd/dist/antd.css";
+/* @import "antd/dist/antd.css"; */
 
 /* Layout */
 .App {
-  text-align: center;
+  /* text-align: center; */
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 .app-layout {
   /* display: flex; */
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   /* padding-bottom: 60px; */
@@ -17,10 +24,9 @@
   justify-content: flex-end;
   top: 0;
   left: 0;
-  /* position: sticky; */
   position: static;
   width: 100%;
-  border: 3px solid red;
+  /* border: 3px solid red; */
 }
 
 .app-container {
@@ -28,7 +34,6 @@
   top: 0;
   left: 0;
   bottom: 0;
-  /* right: 0; */
   width: 100%;
   height: 100%;
 }
@@ -36,7 +41,6 @@
 #brand {
   left: 0;
   position: absolute;
-  /* border: 2px solid red; */
 }
 
 .footer {
@@ -97,38 +101,29 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   position: absolute;
   width: 100%;
   height: 100%;
-  /* justify-content: center;
-  text-align: center;
-  position: absolute;
-  width: 50%;
-  height: 100%;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%); */
   border: 3px solid blue;
 }
 
 .signin-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 100%;
-  height: 20%;
-  /* margin: 0.25em 25%;
-  padding: 0.25em;
-  max-width: 100%;
-  height: 20%; */
+  align-self: center;
+  text-align: center;
+  min-width: 30%;
+  height: auto;
+  margin: auto;
+  padding: 0.2rem;
   border: 3px solid green;
 }
 
 .signin-form-item {
-  width: 100%;
-  /* margin: 0.25em 25%;
-  height: 4em; */
+  align-self: center;
+  padding: 0 0.25em;
+  min-width: 100%;
+  /* margin: auto; */
+  border: 3px solid yellow;
 }
 
 .signin-form-remember,
@@ -141,18 +136,21 @@
 }
 
 .signin-form-button {
-  width: 100%;
-  /* top: -1.5em; */
+  align-self: center;
+  padding: 0 0.25em;
+  min-width: 100%;
+  margin: auto;
 }
 
 .google-signin-button-container {
   align-self: center;
-  width: 30%;
-  border: 3px solid yellow;
+  min-width: 30%;
+  border: 3px solid green;
 }
 
 .google-signin-button {
-  align-self: center;
   padding: 0 0.25em;
-  width: 100%;
+  min-width: 100%;
+  margin: auto;
+  border: 3px solid yellow;
 }
