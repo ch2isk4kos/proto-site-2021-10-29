@@ -98,7 +98,8 @@ const NavBar = () => {
           className="navbar-item"
           key="SubMenu"
           icon={<UserOutlined />}
-          title="Options"
+          // title="Options"
+          title={user.email.split("@")[0]}
         >
           <ItemGroup title="Dashboard">
             <Item className="navbar-sub-item" key="setting:1">
