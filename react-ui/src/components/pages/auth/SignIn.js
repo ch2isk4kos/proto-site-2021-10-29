@@ -133,20 +133,12 @@ const SignIn = () => {
           rules={[
             {
               type: "email",
-              required: true,
-              message: "Please enter your email address!",
-              warningOnly: true,
-              min: 6,
+              message: "The input is not valid E-mail!",
             },
-            // {
-            //   validator: async (_, value) => {
-            //     if (!value || value !== user.email) {
-            //       return Promise.reject(
-            //         new Error("Email address not recognized.")
-            //       );
-            //     }
-            //   },
-            // },
+            {
+              required: true,
+              message: "Please input your E-mail!",
+            },
           ]}
           hasFeedback
         >
