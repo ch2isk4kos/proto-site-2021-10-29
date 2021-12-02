@@ -30,6 +30,57 @@ img {
   /* border: 3px solid red; */
 }
 
+/* layout/Ticker.js */
+/* https://codepen.io/Veronica18/embed/zLarzM?height=265&theme-id=0&slug-hash=zLarzM&default-tab=html%2Cresult&user=Veronica18&pen-title=zLarzM&name=cp_embed_1#result-box */
+.ticker {
+  align-self: center;
+  width: 100%;
+  margin: auto;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.ticker h1 {
+  align-self: center;
+  /* Starting position */
+  -moz-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  /* Apply animation to this element */
+  -moz-animation: ticker 25s linear infinite;
+  -webkit-animation: ticker 25s linear infinite;
+  animation: ticker 25s linear infinite;
+}
+
+@-moz-keyframes ticker {
+  0% {
+    -moz-transform: translateX(100%);
+  }
+  100% {
+    -moz-transform: translateX(-100%);
+  }
+}
+@-webkit-keyframes ticker {
+  0% {
+    -webkit-transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+  }
+}
+@keyframes ticker {
+  0% {
+    -moz-transform: translateX(100%); /* Firefox bug fix */
+    -webkit-transform: translateX(100%); /* Firefox bug fix */
+    transform: translateX(100%);
+  }
+  100% {
+    -moz-transform: translateX(-100%); /* Firefox bug fix */
+    -webkit-transform: translateX(-100%); /* Firefox bug fix */
+    transform: translateX(-100%);
+  }
+}
+
 .app-container {
   position: relative;
   top: 0;
