@@ -11,19 +11,6 @@ import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 
 const { Item } = Form;
 
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
-
 const SignUpForm = ({ history }) => {
   const [form] = Form.useForm();
   const [, forceUpdate] = useState({}); // To disable submit button at the beginning.
@@ -43,6 +30,10 @@ const SignUpForm = ({ history }) => {
   useEffect(() => {
     if (user && user.token) navigate("/");
   }, [user, navigate]);
+
+  useEffect(() => {
+    if (!signUpData.email) navigate("/");
+  }, [signUpData, navigate]);
 
   useEffect(() => {
     setSignUpData({ email: window.localStorage.getItem("email") });
@@ -115,10 +106,7 @@ const SignUpForm = ({ history }) => {
         name="basic"
         form={form}
         labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
+          span: 6,
         }}
         initialValues={{
           email: signUpData.email,
@@ -169,13 +157,8 @@ const SignUpForm = ({ history }) => {
               message: "Please input your password!",
             },
             {
-              validator: async (_, value) => {
-                if (!value || value.length < 6) {
-                  return Promise.reject(
-                    new Error("Password must be at least 6 characters")
-                  );
-                }
-              },
+              min: 6,
+              message: "Password must be at least 6 characters",
             },
           ]}
           hasFeedback
@@ -201,10 +184,7 @@ const SignUpForm = ({ history }) => {
                 if (!value || getFieldValue("password") === value) {
                   return Promise.resolve();
                 }
-
-                return Promise.reject(
-                  new Error("The two passwords that you entered do not match!")
-                );
+                return Promise.reject(new Error("Passwords don't match!"));
               },
             }),
           ]}
@@ -227,7 +207,6 @@ const SignUpForm = ({ history }) => {
                   : Promise.reject(new Error("Should accept agreement")),
             },
           ]}
-          {...tailFormItemLayout}
         >
           <Checkbox>
             I have read the <a href="#">agreement</a>
@@ -237,6 +216,7 @@ const SignUpForm = ({ history }) => {
         <Item className="signin-form-item" shouldUpdate>
           {() => (
             <Button
+              className="signin-form-button"
               type="primary"
               htmlType="submit"
               disabled={
