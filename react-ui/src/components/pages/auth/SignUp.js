@@ -2,54 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { sendVerificationLink } from "../../../api/firebase/helpers";
-import {
-  Form,
-  Input,
-  Checkbox,
-  Button,
-  notification,
-  Divider,
-  Space,
-} from "antd";
-import {
-  RadiusUpleftOutlined,
-  RadiusUprightOutlined,
-  RadiusBottomleftOutlined,
-  RadiusBottomrightOutlined,
-} from "@ant-design/icons";
+import { Form, Input, Button, notification } from "antd";
+import { MailOutlined } from "@ant-design/icons";
 
 const { Item } = Form;
-
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
 
 const SignUp = () => {
   const [form] = Form.useForm();
@@ -108,10 +64,9 @@ const SignUp = () => {
 
   return (
     <div className="signup">
-      <h1>Sign Up 2</h1>
+      <h1>Sign Up</h1>
       <Form
-        {...formItemLayout}
-        className="signup-form-2"
+        className="signup-form"
         name="register"
         form={form}
         initialValues={{ email: "" }}
@@ -122,9 +77,8 @@ const SignUp = () => {
       >
         {/* EMAIL */}
         <Item
-          className="signup-form-item-2"
+          className="signin-form-item"
           name="email"
-          label="E-mail"
           rules={[
             {
               type: "email",
@@ -135,35 +89,32 @@ const SignUp = () => {
               message: "Please input your E-mail!",
             },
           ]}
+          hasFeedback
         >
-          <Input type="email" autoFocus required />
-        </Item>
-        {/* AGREEMENT */}
-        <Item
-          className="signup-form-item-2"
-          name="agreement"
-          valuePropName="checked"
-          rules={[
-            {
-              validator: (_, value) =>
-                value
-                  ? Promise.resolve()
-                  : Promise.reject(new Error("Should accept agreement")),
-            },
-          ]}
-          {...tailFormItemLayout}
-        >
-          <Checkbox>
-            I have read the <a href="#">agreement</a>
-          </Checkbox>
+          <Input
+            className="signup-form-item-input"
+            name="email"
+            prefix={<MailOutlined className="site-form-item-icon" />}
+            placeholder="email@address.com"
+            autoFocus
+          />
         </Item>
         {/* SUBMIT BUTTON */}
-        <Item className="signup-form-item-2" {...tailFormItemLayout}>
-          <Space>
-            <Button type="primary" htmlType="submit">
+        <Item className="signup-form-item" shouldUpdate>
+          {() => (
+            <Button
+              className="signup-form-button"
+              type="primary"
+              htmlType="submit"
+              disabled={
+                !email ||
+                !!form.getFieldsError().filter(({ errors }) => errors.length)
+                  .length
+              }
+            >
               Confirm
             </Button>
-          </Space>
+          )}
         </Item>
       </Form>
     </div>

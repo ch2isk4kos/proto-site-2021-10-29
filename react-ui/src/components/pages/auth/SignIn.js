@@ -132,12 +132,10 @@ const SignIn = () => {
           name="email"
           rules={[
             {
+              type: "email",
               required: true,
-              pattern:
-                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
               message: "Please enter your email address!",
               warningOnly: true,
-              type: "string",
               min: 6,
             },
             // {
@@ -169,13 +167,8 @@ const SignIn = () => {
               message: "Please input your Password!",
             },
             {
-              validator: async (_, value) => {
-                if (!value || value.length < 6) {
-                  return Promise.reject(
-                    new Error("Password must be at least 6 characters")
-                  );
-                }
-              },
+              min: 6,
+              message: "Password must be at least 6 characters",
             },
           ]}
           hasFeedback
