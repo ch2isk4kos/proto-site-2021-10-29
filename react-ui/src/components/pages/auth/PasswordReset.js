@@ -11,13 +11,7 @@ import {
   Divider,
   Space,
 } from "antd";
-import {
-  RadiusUpleftOutlined,
-  RadiusUprightOutlined,
-  RadiusBottomleftOutlined,
-  RadiusBottomrightOutlined,
-  MailOutlined,
-} from "@ant-design/icons";
+import { MailOutlined } from "@ant-design/icons";
 
 const { Item } = Form;
 
@@ -106,13 +100,9 @@ const PasswordReset = () => {
   return (
     <div className="signup">
       <h1>Forgot Password?</h1>
-      <p>
-        It happens! Enter your email and we'll send you a link to reset your
-        password.
-      </p>
+
       <Form
-        {...formItemLayout}
-        className="signup-form-2"
+        className="signup-form"
         name="register"
         form={form}
         initialValues={{ email: "" }}
@@ -121,46 +111,50 @@ const PasswordReset = () => {
         onFinish={handleOnSubmit}
         scrollToFirstError
       >
+        <p>
+          It happens! Enter your email and we'll send you a link to reset your
+          password.
+        </p>
         {/* EMAIL */}
         <Item
           className="signin-form-item"
           name="email"
           rules={[
             {
-              required: true,
-              pattern:
-                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-              message: "Please enter your email address!",
-              warningOnly: true,
-              type: "string",
-              min: 6,
+              type: "email",
+              message: "The input is not valid E-mail!",
             },
-            // {
-            //   validator: async (_, value) => {
-            //     if (!value || value !== user.email) {
-            //       return Promise.reject(
-            //         new Error("Email address not recognized.")
-            //       );
-            //     }
-            //   },
-            // },
+            {
+              required: true,
+              message: "Please input your E-mail!",
+            },
           ]}
           hasFeedback
         >
           <Input
-            className="signin-form-item-input"
+            className="signup-form-item-input"
+            name="email"
             prefix={<MailOutlined className="site-form-item-icon" />}
             placeholder="email@address.com"
             autoFocus
           />
         </Item>
         {/* SUBMIT BUTTON */}
-        <Item className="signup-form-item-2" {...tailFormItemLayout}>
-          <Space>
-            <Button type="primary" htmlType="submit">
+        <Item className="signup-form-item" shouldUpdate>
+          {() => (
+            <Button
+              className="signup-form-button"
+              type="primary"
+              htmlType="submit"
+              disabled={
+                !email ||
+                !!form.getFieldsError().filter(({ errors }) => errors.length)
+                  .length
+              }
+            >
               Reset Password
             </Button>
-          </Space>
+          )}
         </Item>
       </Form>
     </div>
