@@ -100,7 +100,10 @@ const PasswordReset = () => {
   return (
     <div className="signup">
       <h1>Forgot Password?</h1>
-
+      <p>
+        It happens! Enter your email and we'll send you a link to reset your
+        password.
+      </p>
       <Form
         className="signup-form"
         name="register"
@@ -111,10 +114,6 @@ const PasswordReset = () => {
         onFinish={handleOnSubmit}
         scrollToFirstError
       >
-        <p>
-          It happens! Enter your email and we'll send you a link to reset your
-          password.
-        </p>
         {/* EMAIL */}
         <Item
           className="signin-form-item"
